@@ -2,9 +2,10 @@
 <form action="" method="POST">
   <p>Are You Sure! Do you want to {{student}} delete?</p>
   {% csrf_token %}
-  <input type="submit" value="Yes" />
+  <button type="submit" value="Yes" class="btn btn-success">Yes</button>
 </form>
+<p></p>
 <a href="{% url 'list' %}">
-  <button>No</button>
+  <button type="button" class="btn btn-danger">No</button>
 </a>
 {% endblock container %}
