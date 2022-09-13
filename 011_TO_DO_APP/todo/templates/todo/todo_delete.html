@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+
+<h2>TODO Delete</h2>
+<hr />
+<div class="p-4 d-flex align-items-center">
+  <form action="" method="POST">
+    {% csrf_token %} Are you sure for delete {{todo}} ?
+    <input type="submit" , value="Yes" />
+  </form>
+
+  <button><a href="{% url 'home'  %}">No</a></button>
+</div>
+
+{% endblock content %}
