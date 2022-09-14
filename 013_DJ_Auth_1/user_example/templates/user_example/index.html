@@ -13,17 +13,22 @@
             Hello {{user.username | title}}    
         </h1>
         
-        {% comment %}
+
         <a href="{% url 'logout' %}">Logout</a>
-        {% endcomment %}
+
             
         
     {% else %}
         <h1>Hello, please login to see the page.</h1>
         
-        {% comment %}
+
         <a href="{% url 'login' %}">Login</a> 
-        {% endcomment %}
+
+
+        <a href="{% url 'register' %}">Signup</a> 
+
+        <a href="{% url 'password_change' %}">Change Password</a> 
+
             
         
     {% endif %}
