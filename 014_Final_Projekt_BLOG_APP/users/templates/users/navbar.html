@@ -13,8 +13,10 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        {% comment %} {% url 'students' %} {% endcomment %}
-        <a class="nav-link" href="">Students</a>
+        <a class="nav-link" href="{% url 'post_list' %}">Post List</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'post_create' %}">Post Create</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="">Contact</a>

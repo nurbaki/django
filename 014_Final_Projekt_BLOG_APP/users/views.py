@@ -1,10 +1,21 @@
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.contrib import messages
-from .forms import UserForm, UserProfileForm
-from django.contrib.auth.forms import AuthenticationForm
 
-# Create your views here.
+from users.models import Post
+from .forms import UserForm, UserProfileForm, PostForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic import (
+    TemplateView, 
+    ListView, 
+    DetailView, 
+    CreateView,
+    UpdateView,
+    DeleteView,
+    )
+
+
 def home(request):
     return render(request, 'users/home.html')
 
@@ -64,3 +75,53 @@ def user_login(request):
     }
     
     return render(request, 'users/user_login.html', context)
+
+
+
+
+# class HomeView(TemplateView):
+#     template_name = "users/home.html"
+    
+#     def get_context_data(self,  **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['post'] = Post.objects.all()
+#         return context
+
+class PostListView(ListView):
+    model = Post
+    template_name = "users/post_list.html"
+    
+    # queryset = Student.objects.filter(number=123)
+
+    # def get_queryset(self):
+    #     queryset = super().get_queryset(self)
+    #     return queryset
+
+class PostCreateView(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = "users/post_create.html"
+    success_url = reverse_lazy("post_list")
+    
+    def form_valid(self, form):
+        self.object = form.save()
+        if not self.object.number:
+           self.object.number = 999
+        return super().form_valid(form)
+
+# class StudentDetailView(DetailView):
+#     model = Student
+#     pk_url_kwarg = 'id'
+
+
+# class StudentUpdateView(UpdateView):
+#     model = Student
+#     form_class = StudentForm
+#     template_name = "fscohort/student_update.html"
+#     success_url = reverse_lazy("list")
+
+
+# class StudentDeleteView(DeleteView):
+#     model = Student
+#     template_name = 'fscohort/student_delete.html'
+#     success_url = reverse_lazy("list")

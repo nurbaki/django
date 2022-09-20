@@ -4,7 +4,7 @@ from socket import fromshare
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import UserProfile
+from .models import Profile, Post
 
 
 class UserForm(UserCreationForm):
@@ -15,8 +15,12 @@ class UserForm(UserCreationForm):
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = Profile
         # fields = ('potfolio', 'profile_pic')
         exclude = ('user',)
 
 
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = "__all__"
