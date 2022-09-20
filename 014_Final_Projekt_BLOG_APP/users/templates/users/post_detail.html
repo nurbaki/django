@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+
+{% block body %}
+
+<h1>Post Detail Page</h1>
+
+{% if request.user.is_authenticated %}
+<p>Wellcome {{ request.user | title }}!</p>
+{% else %}
+<p>Wellcome Guest!</p>
+{% endif %}
+
+
+<div>{{post.title}}</div>
+<div>{{post.content}}</div>
+
+<div>
+  <a href="#">Edit</a>
+  <a href="#">Delete</a>
+</div>
+
+{% endblock body %}

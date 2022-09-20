@@ -13,12 +13,12 @@ class Profile(models.Model):
 
     
 class Category(models.Model):
-    CATEGORY =(
-        ("1", "Frontend"),
-        ("2", "Backend"),
-        ("3", "Full-Stack"),
-    )
-    name = models.CharField(max_length=50, choices=CATEGORY)
+
+    name = models.CharField(max_length=50)
+
+    
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):

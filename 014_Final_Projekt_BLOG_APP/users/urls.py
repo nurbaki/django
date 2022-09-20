@@ -4,7 +4,8 @@ from django.conf import settings
 from .views import home, user_logout, register, user_login
 from .views import (
     PostListView,
-    PostCreateView, 
+    PostCreateView,
+    PostDetailView, 
 )
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
 
     path('post_list/', PostListView.as_view(), name="post_list"),
     path('post_create/', PostCreateView.as_view(), name="post_create"),
+    path('detail/<int:pk>', PostDetailView.as_view(), name="post_detail"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

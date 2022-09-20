@@ -10,4 +10,18 @@
 <p>Wellcome Guest!</p>
 {% endif %}
 
+
+
+
+<ul>
+    {% for post in post_list %}
+    <a href="{% url 'post_detail' post.id  %}">
+      <li>{{post.title}}</li>
+      <li>{{post.content}}</li>
+    </a>
+    {% endfor %}
+</ul>
+
+
+
 {% endblock body %}

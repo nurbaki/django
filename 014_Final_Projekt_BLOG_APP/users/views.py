@@ -102,16 +102,11 @@ class PostCreateView(CreateView):
     form_class = PostForm
     template_name = "users/post_create.html"
     success_url = reverse_lazy("post_list")
-    
-    def form_valid(self, form):
-        self.object = form.save()
-        if not self.object.number:
-           self.object.number = 999
-        return super().form_valid(form)
 
-# class StudentDetailView(DetailView):
-#     model = Student
-#     pk_url_kwarg = 'id'
+
+class PostDetailView(DetailView):
+    model = Post
+    pk_url_kwarg = 'id'
 
 
 # class StudentUpdateView(UpdateView):
