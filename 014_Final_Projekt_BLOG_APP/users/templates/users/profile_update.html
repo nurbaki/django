@@ -2,16 +2,11 @@
 
 {% block body %}
 
-<h1>Post Update</h1>
-
-{% if request.user.is_authenticated %}
-<p>Wellcome {{ request.user | title }}!</p>
-{% else %}
-<p>Wellcome Guest!</p>
-{% endif %}
+<h1>Profile Update</h1>
 
 <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %} {{form.as_p}}
+    {% csrf_token %} 
+    {{form_profile.as_p}}
   
     <input type="submit" value="Update" />
   </form>

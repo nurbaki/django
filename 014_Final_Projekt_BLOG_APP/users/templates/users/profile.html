@@ -1,0 +1,19 @@
+{% extends 'users/base.html' %}
+{% block title %}
+    - Profile
+{% endblock title %}
+{% block body %}
+
+<h1>Profile Page</h1>
+
+<p>Wellcome {{ request.user | title }}!</p>
+
+
+<img src="{{user_profile.image.url}}" alt="">
+
+
+<a href="{% url 'profile_update' %}">Edit</a>
+
+
+
+{% endblock body %}

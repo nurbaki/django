@@ -8,18 +8,15 @@
   <a class="navbar-brand" href="{% url 'home'  %}"><img src="{% static 'users/images/cw_logo.jpg' %}"
       alt="CLARUSWAY_LOGO" />
 
-    Clarusway FS</a>
+    Clarusway Blog</a>
 
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'post_list' %}">Post List</a>
+        <a class="nav-link" href="{% url 'post_list' %}">Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'post_create' %}">Post Create</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="">Contact</a>
+        <a class="nav-link" href="#">About</a>
       </li>
     </ul>
 
@@ -35,21 +32,27 @@
       {% endif %}
 
       <li class="nav-item active">
-        {% comment %} {% url 'logout' %} {% endcomment %}
         <a class="nav-link" href=" {% url 'user_logout' %}">Log Out</a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'post_create' %}">New Post</a>
+      </li>
+
       {% else %}
 
       <li class="nav-item active">
-        {% comment %} {% url 'user_login' %} {% endcomment %}
         <a class="nav-link" href="{% url 'user_login' %}">Log In</a>
+      </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
       </li>
       {% endif %}
 
-      <li class="nav-item active">
-        {% comment %} {% url 'register' %} {% endcomment %}
-        <a class="nav-link" href="{% url 'register' %}">Register</a>
-      </li>
+
 
     </ul>
   </div>

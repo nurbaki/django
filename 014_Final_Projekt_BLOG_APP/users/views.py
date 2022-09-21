@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.contrib import messages
 
-from users.models import Post
+from django.contrib.auth.models import User
+
+from users.models import Post, Profile
 from .forms import UserForm, UserProfileForm, PostForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import (
@@ -59,6 +61,53 @@ def register(request):
     }
     return render(request, 'users/register.html', context)
 
+# class ProfileCreate(CreateView):
+#     model = Profile
+#     form_class = UserProfileForm
+#     template_name = "users/profile_add.html"
+#     success_url = reverse_lazy("profile")
+
+# class ProfileUpdate(UpdateView):
+#     model = User
+#     form_class = UserForm
+#     template_name = "users/profile_update.html"
+#     success_url = reverse_lazy("profile")
+#     pk = 'id'
+
+def profileUpdate(request):
+    user = User.objects.get(username = request.user)
+    user_profile = Profile.objects.get(user = user)
+
+    form_profile = UserProfileForm(instance=user_profile)
+
+    if request.method == 'POST':
+
+        form_profile = UserProfileForm(request.POST, request.FILES, instance= user_profile)
+
+        if form_profile.is_valid():
+            form_profile.save()
+            return redirect('profile')
+
+
+    context = {
+        'form_profile' : form_profile
+    }
+    return render(request, 'users/profile_update.html', context)
+
+
+
+def profileDetail(request):
+    user = User.objects.get(username = request.user)
+    user_profile = Profile.objects.get(user = user)
+    context = {
+        'user_profile' : user_profile
+    }
+    return render(request, 'users/profile.html', context)
+
+
+# class ProfileDetail(TemplateView):
+#     template_name = "users/profile.html"
+
 
 def user_login(request):
     form = AuthenticationForm(request, request.POST or None)
@@ -106,17 +155,67 @@ class PostCreateView(CreateView):
 
 class PostDetailView(DetailView):
     model = Post
-    pk_url_kwarg = 'id'
+    pk = 'id'
 
 
-# class StudentUpdateView(UpdateView):
-#     model = Student
-#     form_class = StudentForm
-#     template_name = "fscohort/student_update.html"
-#     success_url = reverse_lazy("list")
+class PostUpdateView(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = "users/post_update.html"
+    success_url = reverse_lazy("post_list")
+    pk = 'id'
 
 
-# class StudentDeleteView(DeleteView):
-#     model = Student
-#     template_name = 'fscohort/student_delete.html'
-#     success_url = reverse_lazy("list")
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'users/post_delete.html'
+    success_url = reverse_lazy("post_list")
+    pk = 'id'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def register(request):
+#     form_user = UserForm()
+#     form_profile = UserProfileForm()
+
+#     if request.method == 'POST':
+#         form_user = UserForm(request.POST)
+#         # uploaded files coming from request.FILES
+#         form_profile = UserProfileForm(request.POST, request.FILES)
+
+#         if form_user.is_valid() and form_profile.is_valid():
+#             # form_user.save()
+#             # form_profile.save()
+
+#             # we need to define user for profile before save
+#             # how to get the user?
+#             user = form_user.save()
+#             profile = form_profile.save(commit=False)
+#             # get the profile info without saving to db
+
+#             profile.user = user
+#             # now we know the user
+
+#             profile.save()
+#             login(request, user)
+#             messages.success(request, 'Registered Successfully!!')
+
+#             return redirect('home')
+
+
+#     context = {
+#         'form_user' : form_user,
+#         'form_profile' : form_profile
+#     }
+#     return render(request, 'users/register.html', context)

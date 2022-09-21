@@ -1,0 +1,24 @@
+{% extends 'users/base.html' %}
+
+{% block body %}
+
+<h1>Post Delete</h1>
+
+{% if request.user.is_authenticated %}
+<p>Wellcome {{ request.user | title }}!</p>
+{% else %}
+<p>Wellcome Guest!</p>
+{% endif %}
+
+<div>
+    <form action="" , method="POST">
+      {% csrf_token %} 
+      
+      Are you sure delete {{post.title}}?<br />
+      <input type="submit" value="Yes" />
+    </form>
+  
+    <a href="{% url 'post_list'%}"> <button>No</button></a>
+</div>
+
+{% endblock body %}

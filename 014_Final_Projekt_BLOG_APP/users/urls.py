@@ -1,11 +1,16 @@
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import home, user_logout, register, user_login
+from .views import home, user_logout, register, user_login, profileUpdate, profileDetail
 from .views import (
     PostListView,
     PostCreateView,
-    PostDetailView, 
+    PostDetailView,
+    PostDeleteView,
+    PostUpdateView,
+    # ProfileCreate,
+    # ProfileUpdate,
+    # ProfileDetail, 
 )
 
 urlpatterns = [
@@ -16,5 +21,13 @@ urlpatterns = [
 
     path('post_list/', PostListView.as_view(), name="post_list"),
     path('post_create/', PostCreateView.as_view(), name="post_create"),
-    path('detail/<int:pk>', PostDetailView.as_view(), name="post_detail"),
+    path('detail/<int:pk>/', PostDetailView.as_view(), name="post_detail"),
+    path('update/<int:pk>/', PostUpdateView.as_view(), name="post_update"),
+    path('delete/<int:pk>/', PostDeleteView.as_view(), name="post_delete"),
+
+    # path('profile/', ProfileDetail.as_view(), name="profile"),
+    # path('profile_add/', ProfileCreate.as_view(), name="profile_add"),
+    # path('profile_update/<int:pk>/', ProfileUpdate.as_view(), name="profile_update"),
+    path('profile_update/', profileUpdate, name="profile_update"),
+    path('profile/', profileDetail, name="profile"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
