@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth.models import User
 
@@ -103,12 +104,7 @@ def profileDetail(request):
         'user_profile' : user_profile
     }
     return render(request, 'users/profile.html', context)
-
-
-# class ProfileDetail(TemplateView):
-#     template_name = "users/profile.html"
-
-
+ 
 def user_login(request):
     form = AuthenticationForm(request, request.POST or None)
 
@@ -146,14 +142,19 @@ class PostListView(ListView):
     #     queryset = super().get_queryset(self)
     #     return queryset
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = "users/post_create.html"
     success_url = reverse_lazy("post_list")
 
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
-class PostDetailView(DetailView):
+
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     pk = 'id'
 
@@ -171,51 +172,3 @@ class PostDeleteView(DeleteView):
     template_name = 'users/post_delete.html'
     success_url = reverse_lazy("post_list")
     pk = 'id'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def register(request):
-#     form_user = UserForm()
-#     form_profile = UserProfileForm()
-
-#     if request.method == 'POST':
-#         form_user = UserForm(request.POST)
-#         # uploaded files coming from request.FILES
-#         form_profile = UserProfileForm(request.POST, request.FILES)
-
-#         if form_user.is_valid() and form_profile.is_valid():
-#             # form_user.save()
-#             # form_profile.save()
-
-#             # we need to define user for profile before save
-#             # how to get the user?
-#             user = form_user.save()
-#             profile = form_profile.save(commit=False)
-#             # get the profile info without saving to db
-
-#             profile.user = user
-#             # now we know the user
-
-#             profile.save()
-#             login(request, user)
-#             messages.success(request, 'Registered Successfully!!')
-
-#             return redirect('home')
-
-
-#     context = {
-#         'form_user' : form_user,
-#         'form_profile' : form_profile
-#     }
-#     return render(request, 'users/register.html', context)

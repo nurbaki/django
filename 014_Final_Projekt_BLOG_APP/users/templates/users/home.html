@@ -2,12 +2,13 @@
 
 {% block body %}
 
-<h1>Home Page</h1>
+<div class="header">
+<h2>Django Blog</h2>
 
 {% if request.user.is_authenticated %}
 <p>Wellcome {{ request.user | title }}!</p>
 {% else %}
 <p>Wellcome Guest!</p>
 {% endif %}
-
+</div>
 {% endblock body %}

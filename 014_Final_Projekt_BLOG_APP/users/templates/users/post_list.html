@@ -12,14 +12,29 @@
 
 
 
+<div class="card-group">
 
-<ul>
-    {% for post in post_list %}
-    <a href="{% url 'post_detail' post.id  %}">
-      <li>{{post.title}}</li>
-    </a>
-    {% endfor %}
-</ul>
+  {% for post in post_list %}
+
+  <div class="card" style="width: 18rem;">
+    <img src="{{post.image_url}}" class="card-img-top" alt="Post Image">
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5>
+      <p class="card-text">{{post.content}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{post.category}}</li>
+      <li class="list-group-item">{{post.last_updated}}</li>
+      <li class="list-group-item">A third item</li>
+    </ul>
+    <div class="card-body">
+      <a href="{% url 'post_detail' post.id  %}" class="card-link">Detail</a>
+      <a href="#" class="card-link">Like</a>
+    </div>
+  </div>
+  {% endfor %}
+  
+</div>
 
 
 
