@@ -19,8 +19,12 @@ from django.views.generic import (
     )
 
 
-def home(request):
-    return render(request, 'users/home.html')
+# def home(request):
+#     return render(request, 'users/home.html')
+
+class AboutView(TemplateView):
+    template_name = "users/about.html"
+
 
 def user_logout(request):
     logout(request)
@@ -61,19 +65,6 @@ def register(request):
         'form_profile' : form_profile
     }
     return render(request, 'users/register.html', context)
-
-# class ProfileCreate(CreateView):
-#     model = Profile
-#     form_class = UserProfileForm
-#     template_name = "users/profile_add.html"
-#     success_url = reverse_lazy("profile")
-
-# class ProfileUpdate(UpdateView):
-#     model = User
-#     form_class = UserForm
-#     template_name = "users/profile_update.html"
-#     success_url = reverse_lazy("profile")
-#     pk = 'id'
 
 def profileUpdate(request):
     user = User.objects.get(username = request.user)
@@ -123,30 +114,15 @@ def user_login(request):
 
 
 
-
-# class HomeView(TemplateView):
-#     template_name = "users/home.html"
-    
-#     def get_context_data(self,  **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['post'] = Post.objects.all()
-#         return context
-
 class PostListView(ListView):
     model = Post
-    template_name = "users/post_list.html"
-    
-    # queryset = Student.objects.filter(number=123)
-
-    # def get_queryset(self):
-    #     queryset = super().get_queryset(self)
-    #     return queryset
+    template_name = "users/home.html"
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = "users/post_create.html"
-    success_url = reverse_lazy("post_list")
+    success_url = reverse_lazy("home")
 
     
     def form_valid(self, form):
@@ -163,12 +139,12 @@ class PostUpdateView(UpdateView):
     model = Post
     form_class = PostForm
     template_name = "users/post_update.html"
-    success_url = reverse_lazy("post_list")
+    success_url = reverse_lazy("home")
     pk = 'id'
 
 
 class PostDeleteView(DeleteView):
     model = Post
     template_name = 'users/post_delete.html'
-    success_url = reverse_lazy("post_list")
+    success_url = reverse_lazy("home")
     pk = 'id'

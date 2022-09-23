@@ -1,13 +1,15 @@
-h1 {
-    background-color: red;
-    text-align: center;
+
+.card {
+  border-radius: 3px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
 }
 
-.header{
-  text-align: center;
-  background-color: red;
-}
-
-.card img{
-  width: 200px;
+.card img {
+  /* object-fit: fill; */
+  max-height: 12rem;
+  max-width: 18rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
 }

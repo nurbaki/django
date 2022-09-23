@@ -2,13 +2,66 @@
 
 {% block body %}
 
-<div class="header">
-<h2>Django Blog</h2>
+<div class="text-center">
+<h1 >Django Blog</h1>
 
 {% if request.user.is_authenticated %}
 <p>Wellcome {{ request.user | title }}!</p>
 {% else %}
 <p>Wellcome Guest!</p>
+<p>Please Login to see Blog content</p>
 {% endif %}
+
 </div>
+
+
+<div class="card-group row">
+
+    {% for post in post_list %}
+
+  <div class="col-4">
+    <div class="card p-3 mb-5" style="width: 22rem; height: 28rem;">
+        <div class="d-flex justify-content-center">
+        {% if request.user.is_authenticated %}
+         <a href="{% url 'post_detail' post.id  %}" class="card-link">
+         <img src="{{post.image_url}}" class="card-img-top" alt="Post Image"></a>
+        {% else %}
+        <a href="{% url 'user_login' %}" class="card-link">
+            <img src="{{post.image_url}}" class="card-img-top" alt="Post Image"></a>
+        {% endif %}
+        </div>
+      <div class="card-body">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'post_detail' post.id  %}" class="card-link">
+        <h5 class="card-title text-center">{{post.title}}</h5></a>
+        {% else %}
+        <a href="{% url 'user_login' %}" class="card-link">
+            <h5 class="card-title text-center">{{post.title}}</h5></a>
+        {% endif %}
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <p class="card-text">{{ post.content | truncatechars:30}}</p>
+        </li>
+        <li class="list-group-item">
+            <p>Category : {{post.category}} <br>
+               Last Update : {{post.last_updated}}
+            </p>
+        </li>
+      </ul>
+      <div class="card-body d-flex justify-content-around align-items-center">
+        <a href="#" class="card-link"><i class="bi bi-heart"></i></a>
+        <a href="#" class="card-link"><i class="bi bi-chat-left-text"></i></a>
+        <a href="#" class="card-link"><i class="bi bi-eye"></i></a>
+      </div>
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+
+
+
 {% endblock body %}
