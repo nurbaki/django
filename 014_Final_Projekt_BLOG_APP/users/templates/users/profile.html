@@ -14,12 +14,6 @@
 
 <div class="container">
 
-{% comment %} <div class="col-md-4">
-    <img src="{% static 'media folder/profile_pic/avatar1.jpg' %}" class="img-fluid rounded-start" alt="nurbaki photo">
-</div> {% endcomment %}
-
-
-
 <ul class="list-group list-group-flush">
     {% if user_profile.image.url %}
     <li class="list-group-item"><img src="{{user_profile.image.url}}" alt="profile pic"></li>
