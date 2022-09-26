@@ -1,5 +1,6 @@
 {% extends 'users/base.html' %}
 
+{% load static %}
 {% block body %}
 
 <div class="text-center">
@@ -16,14 +17,18 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
+            <div class="row d-flex justify-content-center m-3">
               <div class="col-md-4">
-                <img src="./images/cw_logo.jpg" class="img-fluid rounded-start" alt="nurbaki photo">
+                <img src="{% static 'users/images/nb-profile.jpg' %}" class="img-fluid rounded-start" alt="nurbaki photo">
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8 m-2 p-2">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 class="card-title">Hello my name is Nurbaki</h5>
+                  <p class="card-text">I developed this blog application as the final project of the
+                    Full Stack Developer training. In this project, I used  This means; All blog data and user information are stored in the
+                    Google Firebase database. Thus, my project has a safe, practical
+                    and professional infrastructure that can be accessed from
+                    anywhere..  I used also React, Bootstrap in this project</p>
                   <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
               </div>

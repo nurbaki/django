@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=500, blank=True)
-    image = models.ImageField(upload_to='profile_pic', blank=True)
-    # image = models.ImageField(upload_to='profile_pic', blank=True, default="avatar.png")
+    # image = models.ImageField(upload_to='profile_pic', blank=True)
+    image = models.ImageField(upload_to='profile_pic', blank=True, default="avatar1.jpg")
 
 
     def __str__(self):
@@ -28,10 +28,8 @@ class Post(models.Model):
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    # category = models.ManyToManyField(Category)
     title = models.CharField(max_length=100)
     content = models.TextField()
-    # image = models.ImageField(upload_to='post_image')
     image_url = models.URLField(blank=True, null=True)
     publish_date = models.DateField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)

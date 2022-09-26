@@ -2,18 +2,24 @@
 
 {% block body %}
 
-<h1>Post Update</h1>
+<div class="m-3 d-flex justify-content-center">
+  <h1>Blog Edit</h1>
+</div>
 
-{% if request.user.is_authenticated %}
-<p>Wellcome {{ request.user | title }}!</p>
-{% else %}
-<p>Wellcome Guest!</p>
-{% endif %}
 
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %} {{form.as_p}}
-  
-    <input type="submit" value="Update" />
-  </form>
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+
+        <form action="" method="post">
+            {% csrf_token %} {{form|crispy}}
+
+            <div class="mr-2 d-flex justify-content-center">
+              <button type="submit" class="btn btn-warning" style="width: 6rem;">Update</button>
+           </div>
+        </form>
+    </div>
+</div>
 
 {% endblock body %}

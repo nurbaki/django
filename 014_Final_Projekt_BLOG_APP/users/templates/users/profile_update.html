@@ -2,13 +2,32 @@
 
 {% block body %}
 
-<h1>Profile Update</h1>
 
-<form action="" method="POST" enctype="multipart/form-data">
+
+<div class="m-3 d-flex justify-content-center">
+     <h1>Profile Update</h1>
+</div>
+
+{% comment %} <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
     {{form_profile.as_p}}
   
     <input type="submit" value="Update" />
-  </form>
+  </form> {% endcomment %}
+
+
+
+  {% load crispy_forms_tags %}
+
+  <div class="row">
+      <div class="col-md-6 offset-md-3">
+  
+          <form action="" method="post">
+              {% csrf_token %} {{form_profile|crispy}}
+              <button type="submit" class="btn btn-danger">Update</button>
+          </form>
+      </div>
+  </div>
+
 
 {% endblock body %}

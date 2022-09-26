@@ -19,9 +19,6 @@ from django.views.generic import (
     )
 
 
-# def home(request):
-#     return render(request, 'users/home.html')
-
 class AboutView(TemplateView):
     template_name = "users/about.html"
 
@@ -86,8 +83,6 @@ def profileUpdate(request):
     }
     return render(request, 'users/profile_update.html', context)
 
-
-
 def profileDetail(request):
     user = User.objects.get(username = request.user)
     user_profile = Profile.objects.get(user = user)
@@ -111,8 +106,6 @@ def user_login(request):
     }
     
     return render(request, 'users/user_login.html', context)
-
-
 
 class PostListView(ListView):
     model = Post
