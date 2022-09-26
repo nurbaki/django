@@ -21,7 +21,11 @@
 
 
 <ul class="list-group list-group-flush">
-    <li class="list-group-item"><img src="{{user_profile.image}}" alt="profile pic"></li>
+    {% if user_profile.image.url %}
+    <li class="list-group-item"><img src="{{user_profile.image.url}}" alt="profile pic"></li>
+    {% else %}
+    <li class="list-group-item"><img src="{% static 'media folder/profile_pic/avatar1.jpg' %}" alt="profile pic"></li>
+    {% endif %}
     <li class="list-group-item">Author : {{user_profile.user}}</li>
     <li class="list-group-item">Bio : {{user_profile.bio}}</li>
   </ul>

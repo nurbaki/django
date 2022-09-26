@@ -71,7 +71,8 @@ def profileUpdate(request):
 
     if request.method == 'POST':
 
-        form_profile = UserProfileForm(request.POST, request.FILES, instance= user_profile)
+        form_profile = UserProfileForm(request.POST, instance= user_profile, files=request.FILES)
+        print(form_profile)
 
         if form_profile.is_valid():
             form_profile.save()
@@ -110,6 +111,18 @@ def user_login(request):
 class PostListView(ListView):
     model = Post
     template_name = "users/home.html"
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context["post_list"]=Post.objects.filter(status='2')
+        return context
+
+class MyPostsView(ListView):
+    model = Post
+    template_name = "users/myposts.html"
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context["post_list"]=Post.objects.filter(user=self.request.user)
+        return context
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
