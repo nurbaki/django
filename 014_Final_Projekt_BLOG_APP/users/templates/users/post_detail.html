@@ -9,14 +9,16 @@
 <div class="container mt-4 d-flex justify-content-center">
   <div class="row">
     <div class="col">
-      <div class="card" style="width: 36rem;">
-        <div class="m-2 d-flex justify-content-center">
+      <div class="card" style="width: 54rem;">
+        <div class="m-3 d-flex justify-content-center">
           <img src="{{post.image_url}}" class="card-img-top" alt="post image">
         </div>
         
         <div class="card-body text-center">
-          <h5 class="card-title">{{post.title}}</h5>
-          <p class="card-text">{{post.content}}</p>
+          <h2 class="card-title">{{post.title}}</h2>
+        </div>
+        <div>
+          <p class="card-text text-justify p-4">{{post.content}}</p>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Publish Date : {{post.publish_date}}</li>

@@ -1,5 +1,9 @@
 {% extends 'users/base.html' %}
 
+{% block title %}
+    - About
+{% endblock title %}
+
 {% load static %}
 {% block body %}
 
@@ -17,7 +21,7 @@
     <div class="row d-flex justify-content-center">
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row d-flex justify-content-center m-3">
-              <div class="col-md-4">
+              <div class="col-md-4 d-flex justify-content-center">
                 <img src="{% static 'users/images/nb-profile.jpg' %}" class="img-fluid rounded-start" alt="nurbaki photo">
               </div>
               <div class="col-md-8 m-2 p-2">
